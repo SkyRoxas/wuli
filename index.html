@@ -27,8 +27,9 @@
 </body>
 
 <script>
+const canvas = document.getElementById("canvas")
+const ctx = canvas.getContext("2d")
 
-const ctx = document.getElementById("canvas").getContext("2d")
 let time = 0
 
 let boll = {
@@ -37,7 +38,8 @@ let boll = {
         y: 300
     },
     radius: 10,
-    velocity: 100
+    velocity: 10,
+    acceleration: 2
 }
 
 const draw = () => {
@@ -46,11 +48,13 @@ const draw = () => {
     ctx.arc(boll.position.x, boll.position.y, boll.radius, 0, Math.PI * 2)
     ctx.fill()
 
-    // boll.position.x += boll.velocity
+    // boll.velocity += boll.acceleration
+    boll.position.x += boll.velocity  * 0.2
 }
 
 const render = (t) => {
     time = t
+    // canvas.width = canvas.width
     draw()
     requestAnimationFrame(render)
 }
