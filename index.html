@@ -26,5 +26,38 @@
     <canvas id="canvas" width="840" height="600"></canvas>
 </body>
 
+<script>
+
+const ctx = document.getElementById("canvas").getContext("2d")
+let time = 0
+
+let boll = {
+    position: {
+        x: 50,
+        y: 300
+    },
+    radius: 10,
+    velocity: 100
+}
+
+const draw = () => {
+    ctx.fillStyle = "#000"
+    ctx.beginPath()
+    ctx.arc(boll.position.x, boll.position.y, boll.radius, 0, Math.PI * 2)
+    ctx.fill()
+
+    // boll.position.x += boll.velocity
+}
+
+const render = (t) => {
+    time = t
+    draw()
+    requestAnimationFrame(render)
+}
+
+requestAnimationFrame(render)
+
+</script>
+
 
 </html>
