@@ -43,7 +43,7 @@ let boll = {
     },
     acceleration: {
         x: 0,
-        y: 0
+        y: 5
     },
     radius: 10,
     gravity: 5
@@ -64,6 +64,11 @@ const draw = () => {
 
     if (boll.position.y >= canvas.height - boll.radius) {
         boll.position.y = canvas.height - boll.radius
+        // 作用力會等於反作用力
+        boll.velocity.y = -boll.velocity.y
+        // 只需要取得物體本身的速度，所以在這邊扣除本身的加速度
+        boll.velocity.y -= boll.gravity
+        boll.velocity.y -= boll.acceleration.y
     }
 }
 
