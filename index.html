@@ -34,12 +34,19 @@ let time = 0
 
 let boll = {
     position: {
-        x: 50,
+        x: 100,
         y: 300
     },
+    velocity: {
+        x: 0,
+        y: 0
+    },
+    acceleration: {
+        x: 0,
+        y: 0
+    },
     radius: 10,
-    velocity: 10,
-    acceleration: 2
+    gravity: 5
 }
 
 const draw = () => {
@@ -48,13 +55,21 @@ const draw = () => {
     ctx.arc(boll.position.x, boll.position.y, boll.radius, 0, Math.PI * 2)
     ctx.fill()
 
-    // boll.velocity += boll.acceleration
-    boll.position.x += boll.velocity  * 0.2
+    boll.velocity.x += boll.acceleration.x
+    boll.position.x += boll.velocity.x
+
+    boll.velocity.y += boll.gravity
+    boll.velocity.y += boll.acceleration.y
+    boll.position.y += boll.velocity.y
+
+    if (boll.position.y >= canvas.height - boll.radius) {
+        boll.position.y = canvas.height - boll.radius
+    }
 }
 
 const render = (t) => {
     time = t
-    // canvas.width = canvas.width
+    canvas.width = canvas.width
     draw()
     requestAnimationFrame(render)
 }
